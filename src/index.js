@@ -8,8 +8,6 @@ import _get from 'lodash/get';
 
 const routePattern = /to\":\"\/(.*?)\"/g;
 
-
-
 /**
  *  An accordion menu based on React Semantic UI library
  *
@@ -22,6 +20,9 @@ export default class SemanticAccordionMenu extends Component {
     clicked: [],
   }
   
+  /*
+  * Accordion custom theme
+  */
   StyledAccordion = Styled(Accordion)`
     background: transparent!important;
 
@@ -64,7 +65,7 @@ export default class SemanticAccordionMenu extends Component {
 
     .contentWrapper a {
       padding: 10px;
-      padding-left: 16px;
+      padding-left: 10px;
       display: block;
       .icon{
         margin-right: 11px;
@@ -94,9 +95,11 @@ export default class SemanticAccordionMenu extends Component {
     position: 'relative',   
   }
 
+  /*
+  * Click event on route links
+  */
   itemClick = (event) => {
     this.setState({ clicked: []})
-
     event.stopPropagation();
   }
   
@@ -105,38 +108,58 @@ export default class SemanticAccordionMenu extends Component {
    */
   checkChildRoutes = (obj) => JSON.stringify(obj).match(routePattern).map(route => route.split("\"")[2]);
   
-
-
+  /*
+  * Wrapper for first level links
+  */
   itemWrapper = (el) => ({ children: (<div className="itemWrapper" style={this.ItemStyle} onClick={this.itemClick}>{el}</div>)});
+
+  /*
+  * Wrapper for contents
+  */
   contentWrapper = (el) => (<div className="contentWrapper" style={this.ContentStyle} onClick={this.itemClick}>{el}</div>);
   
+  /*
+  * Panel generator
+  */
   getPanels = (objs) => objs.map(
-    (obj) => ({ key: obj.id, active: this.isActivePanel(obj), onTitleClick: this.onTitleClick, title: obj.item ? this.itemWrapper(obj.item) : obj.title, content: { content: this.getContent(obj)}})
+    (obj) => ({ key: obj.id, active: this.isActivePanel(obj), onTitleClick: this.onTitleClick, title: obj.directLink ? this.itemWrapper(obj.title) : obj.title, content: { content: this.getContent(obj)}})
   )
-
+  
+  /*
+  * Click handle on title to manage clicked elements in tree
+  */
   onTitleClick = (e,data) => {
-    // console.log(e.target);
-    // data.active = !data.active;
-    console.log(e, data)
+    // Get the already clicked elements
     const clicked = [...this.state.clicked];
+    // Check if the clicked element is present in array
     const index = clicked.indexOf(data.content);
     if (index > -1) {
+      // If present remove it
       clicked.splice(index, 1);
       this.setState({ clicked });
     } else {
+      // If not present create it
       clicked.push(data.content);
       this.setState({ clicked });
     }
   }
 
+  /*
+  * Check wheter a panel is active or not based either on route
+  * and if the element has beeen clicked
+  */
   isActivePanel = (obj) => {
+    // Default result
     let result = false;
+    // Checks the route in current tree branch
     const childRoutes = this.checkChildRoutes(obj);
+    // Checks if the tree contains an active route
     for(let i = 0; i < childRoutes.length; i += 1){
       if(window.location.href.includes(childRoutes[i])){
         result = true;
       }
     }
+    // Checks if the object has been clicked
     if(this.state.clicked.indexOf(obj.title) > -1 ) {
       return !result;
     } else {
@@ -144,6 +167,9 @@ export default class SemanticAccordionMenu extends Component {
     }
   }
   
+  /*
+  * Generate subacordions
+  */
   getContent = (obj) => Array.isArray(_get(obj, 'sections'))  ? <Accordion.Accordion panels={this.getPanels(obj.sections || null )} /> : this.contentWrapper(obj.content);
 
   render() {
