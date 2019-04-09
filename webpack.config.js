@@ -1,6 +1,5 @@
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -9,7 +8,7 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
-  plugins: [new BundleAnalyzerPlugin(), new UglifyJSPlugin()],
+  plugins: [new BundleAnalyzerPlugin()],
   module: {
     rules: [
       {
