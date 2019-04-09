@@ -1,3 +1,4 @@
 module.exports = {
-    components: 'src/[A-Z]*.js'
+    components: 'src/*.js',
+    webpackConfig: require('./webpack.config.js')
   }

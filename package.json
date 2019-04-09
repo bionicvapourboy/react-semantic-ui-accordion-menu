@@ -37,6 +37,7 @@
     "image-webpack-loader": "^4.6.0",
     "jsdoc": "^3.5.5",
     "react": "^16.4.0",
+    "react-docgen-displayname-handler": "^2.1.1",
     "react-dom": "^16.4.0",
     "react-router-dom": "^5.0.0",
     "react-styleguidist": "^9.0.6",

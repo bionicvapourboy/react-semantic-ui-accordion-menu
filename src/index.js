@@ -9,7 +9,7 @@ import _get from 'lodash/get';
 const routePattern = /to\":\"\/(.*?)\"/g;
 
 /**
- *  An accordion menu based on React Semantic UI library
+ *  An accordion menu based on React Semantic UI library and NavLink from react-router v4
  *
  * @version 1.0.0
  * @author [Mosè Raguzzini](https://github.com/bionicvapourboy)
