@@ -13,12 +13,12 @@ An accordion menu built on top of react-semantic-ui package and react-dom
 
 **npm**
 ```bash
-npm i react-semantic-ui-accordion-menu --save
+npm i react-semantic-ui-accordion-menu styled-components --save
 ```
 
 **yarn**
 ```bash
-yarn add react-semantic-ui-accordion-menu
+yarn add react-semantic-ui-accordion-menu styled-components
 ```
 
 ---
