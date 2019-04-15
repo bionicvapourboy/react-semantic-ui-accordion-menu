@@ -8,6 +8,10 @@
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bionicvapourboy/react-semantic-ui-accordion-menu.git",
+  },
   "keywords": [
     "Accordion",
     "Menu",
@@ -54,5 +58,6 @@
     "semantic-ui-react": "^0.86.0"
   },
   "author": "Mosè Raguzzini",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/bionicvapourboy/react-semantic-ui-accordion-menu",
 }
