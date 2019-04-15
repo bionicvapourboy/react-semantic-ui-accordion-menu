@@ -122,13 +122,13 @@ export default class SemanticAccordionMenu extends Component {
   * Panel generator
   */
   getPanels = (objs) => objs.map(
-    (obj) => ({ key: obj.id, active: this.isActivePanel(obj), onTitleClick: this.onTitleClick, title: obj.directLink ? this.itemWrapper(obj.title) : obj.title, content: { content: this.getContent(obj)}})
+    (obj) => ({ key: obj.id, active: this.isActivePanel(obj), onTitleClick: this.onTitleClick, title: (!obj.sections && !obj.content) ? this.itemWrapper(obj.title) : obj.title, content: { content: this.getContent(obj)}})
   )
   
   /*
   * Click handle on title to manage clicked elements in tree
   */
-  onTitleClick = (e,data) => {
+  onTitleClick = (e,data) => { 
     // Get the already clicked elements
     const clicked = [...this.state.clicked];
     // Check if the clicked element is present in array
