@@ -5,8 +5,15 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
+    publicPath: "/build/",
     filename: 'index.js',
     libraryTarget: 'commonjs2'
+  },
+  resolve: {
+    extensions: [".js", ".jsx"]
+  },
+  devServer: {
+      port: 3001
   },
   plugins: [new BundleAnalyzerPlugin()],
   module: {

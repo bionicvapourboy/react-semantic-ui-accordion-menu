@@ -27,7 +27,7 @@ yarn add react-semantic-ui-accordion-menu styled-components
 
 | Prop | Type | Default value | Description |
 | --- | --- | --- | --- |
-| `tree`| _Array_ | `[]` | A config file representing the tree of the nested menu. See the [example](#Example) for reference |
+| `tree`| _Array_ | `[]` | A config multidimensional array representing the tree of the nested menu. See the [example](#Example) for reference |
 | `fontSize`| _Number_ | 13 | Font size in px
 | `width`| _String_ | 100% | Menu width
 | `submenuBackgroundColor` | _String_ | #ffffff | Hex/RGB/RGBA background color for submenus |
@@ -48,25 +48,25 @@ import Menu from 'react-semantic-ui-accordion-menu';
 import { Icon } from 'semantic-ui-react';
 
 const config  = [
+  // Wen no "content" or "section" are provided provide a NavLink into the title property
   {
     id: "section-2",
     title: <NavLink exact to="/"><Icon name="home" />Home</NavLink>,
     content: null,
-    directLink: true,
   },
+  // When sections are provided, subaccordions will be generated
   {
     id: "section-1",
     title: [<Icon key="sitemap" name="sitemap" />,"Section 1"],
     sections: [
       { 
         id: "section-1.1",
-        title: [<Icon key="archive" name="archive" />,"Section 1.1"],
-        route: "/about/",
-        content: [<NavLink key="about" exact to="/about/"><Icon name="file alternate" />About</NavLink>, <NavLink key="test" exact to="/test/"><Icon name="folder open" />Test</NavLink>],
-        },
+        title: [<Icon key="archive" name="archive" />,"Section 1.1"],  // When a icon is needed in title, pass it as a fragment     
+        content: [<NavLink key="about" exact to="/about/"><Icon name="file alternate" />About</NavLink>, <NavLink key="test" exact to="/test/"><Icon name="folder open" />Test</NavLink>],  // Multiple links in content could be also passed in as frament
+      },     
       {
         id: "section-1.2",
-        title: [<Icon key="calculator" name="calculator" />, "Section 1.2"],
+        title: [<Icon key="calculator" name="calculator" />, "Section 1.2"],  // When a icon is needed in title, pass it as a fragment
         sections: [
           {
             id: "section-1.2.1",
