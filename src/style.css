@@ -3,35 +3,36 @@
     font-weight: bold;
 }
 
-.semantic-accordion-menu .accordion-menu a {
+.accordion-menu a {
   text-decoration: none;
   color: inherit;
 }
 
-.semantic-accordion-menu .accordion.ui.styled,
-.semantic-accordion-menu .accordion.ui.styled .accordion,
-.semantic-accordion-menu .accordion.ui.styled .title,
-.semantic-accordion-menu .accordion.ui.styled .accordion .title {
+.accordion-menu .accordion.ui.styled,
+.accordion-menu .accordion.ui.styled .accordion,
+.accordion-menu .accordion.ui.styled .title,
+.accordion-menu .accordion.ui.styled .accordion .title {
     border-radius: 0;
     box-shadow: none;
 }
 
-.semantic-accordion-menu  .accordion.ui.styled .content.active, .accordion.ui.styled .content {
+.accordion-menu .accordion.ui.styled .content.active,
+.accordion-menu .accordion.ui.styled .content {
     margin-top: 0px!important;    
 }
 
-.semantic-accordion-menu .accordion.ui.styled div.content.active .accordion,
-.semantic-accordion-menu .accordion.ui.styled div.content .accordion,
-.semantic-accordion-menu .accordion.ui.styled div.content.active,
-.semantic-accordion-menu .accordion.ui.styled div.content
+.accordion-menu .accordion.ui.styled div.content.active .accordion,
+.accordion-menu .accordion.ui.styled div.content .accordion,
+.accordion-menu .accordion.ui.styled div.content.active,
+.accordion-menu .accordion.ui.styled div.content
 {
     margin-top: 0px!important;
     padding-top: 0px!important;
     padding-bottom: 0px!important;
 }
 
-.semantic-accordion-menu .accordion.ui.styled .content,
-.semantic-accordion-menu .accordion.ui.styled .accordion .content
+.accordion-menu .accordion.ui.styled .content,
+.accordion-menu .accordion.ui.styled .accordion .content
 {
     padding-right: 0;
 }
