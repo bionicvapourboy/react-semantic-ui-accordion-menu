@@ -175,7 +175,7 @@ export default class SemanticAccordionMenu extends Component {
   render() {
     const StyledAccordion = this.StyledAccordion;
     return (
-      <div style={{ width: this.props.width, fontSize: this.props.fontSize }} className="accordion-menu">
+      <div className="semantic-accordion-menu" style={{ width: this.props.width, fontSize: this.props.fontSize }} className="accordion-menu">
         <StyledAccordion panels={this.getPanels(this.props.tree)} styled />
       </div>
     )
