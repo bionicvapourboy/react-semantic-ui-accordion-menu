@@ -5,6 +5,7 @@ import Styled from 'styled-components';
 import './style.css';
 import { Accordion } from 'semantic-ui-react';
 import _get from 'lodash/get';
+import { serialize, deserialize } from "react-serialize";
 
 const routePattern = /to\":\"\/(.*?)\"/g;
 
@@ -106,7 +107,7 @@ export default class SemanticAccordionMenu extends Component {
   /**
    * Check for routes in child NavLink of react-router
    */
-  checkChildRoutes = (obj) => JSON.stringify(obj).match(routePattern).map(route => route.split("\"")[2]);
+  checkChildRoutes = (obj) => serialize(obj).match(routePattern).map(route => route.split("\"")[2]);
   
   /*
   * Wrapper for first level links
