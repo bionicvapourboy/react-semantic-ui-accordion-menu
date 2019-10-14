@@ -1,6 +1,6 @@
 {
   "name": "react-semantic-ui-accordion-menu",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "A multilevel accordion menu, buil on top of react-semantic-ui",
   "main": "build/index.js",
   "scripts": {

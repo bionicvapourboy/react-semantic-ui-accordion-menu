@@ -38,4 +38,28 @@
 }
 
 
+.accordion-menu.collapsed  .accordion.ui.styled div.content.active .accordion {
+    display: none!important;
+}
+
+.accordion-menu.collapsed  .accordion.ui.styled .title > * {
+    display: none;
+}
+
+.accordion-menu.collapsed .accordion.ui.styled .title {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.accordion-menu.collapsed  .accordion.ui.styled .title .dropdown.icon{
+    display: none;
+}
+
+.accordion-menu.collapsed  .accordion.ui.styled .title .icon{
+    display: inline-block;
+}
+
+.accordion-menu.collapsed  .accordion.ui.styled .title > .itemWrapper{
+    display: inline-block;
+}
 

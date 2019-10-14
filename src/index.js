@@ -115,7 +115,7 @@ export default class SemanticAccordionMenu extends Component {
   itemWrapper = (el) => ({ children: (<div className="itemWrapper" style={this.ItemStyle} onClick={this.itemClick}>{el}</div>)});
 
   /*
-  * Wrapper for contents
+  * Wrapper for contentsk
   */
   contentWrapper = (el) => (<div className="contentWrapper" style={this.ContentStyle} onClick={this.itemClick}>{el}</div>);
   
@@ -173,10 +173,10 @@ export default class SemanticAccordionMenu extends Component {
   */
   getContent = (obj) => Array.isArray(_get(obj, 'sections'))  ? <Accordion.Accordion panels={this.getPanels(obj.sections || null )} /> : this.contentWrapper(obj.content);
 
-  render() {
+  render() {    
     const StyledAccordion = this.StyledAccordion;
     return (
-      <div style={{ width: this.props.width, fontSize: this.props.fontSize }} className="accordion-menu">
+      <div style={{ width: !this.props.collapsed ? this.props.width : this.props.collapsedWidth, fontSize: this.props.fontSize }} className={`accordion-menu${this.props.collapsed ? ' collapsed' : ''}`}>
         <StyledAccordion panels={this.getPanels(this.props.tree)} styled />
       </div>
     )
@@ -198,7 +198,8 @@ SemanticAccordionMenu.propTypes = {
     activeColor: PropTypes.string,
     /** First level color */
     firstLevelBackgroundColor:  PropTypes.string,
-
+    /** Collapsed menu */
+    collapsed: PropTypes.bool,
   }
 
 SemanticAccordionMenu.defaultProps = {
@@ -210,6 +211,8 @@ SemanticAccordionMenu.defaultProps = {
   separatorColor: '#cccccc',
   activeColor: '#266bc0',
   firstLevelBackgroundColor: '#003178',
+  collapsed: false,
+  collapsedWidth: 39,
 };
 
 
