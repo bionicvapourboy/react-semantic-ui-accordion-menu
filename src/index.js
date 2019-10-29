@@ -3,11 +3,21 @@ import PropTypes from 'prop-types';
 import 'semantic-ui-css/components/accordion.min.css';
 import Styled from 'styled-components';
 import './style.css';
-import { Accordion } from 'semantic-ui-react';
+import { Accordion, Popup } from 'semantic-ui-react';
 import _get from 'lodash/get';
 import { serialize, deserialize } from "react-serialize";
 
 const routePattern = /to\":\"\/(.*?)\"/g;
+
+const TitleTooltipWrapper = Styled.div` 
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding-left: 12px;
+  padding-top: 9px;
+`;
 
 /**
  *  An accordion menu based on React Semantic UI library and NavLink from react-router v4
@@ -19,7 +29,19 @@ export default class SemanticAccordionMenu extends Component {
 
   state = {
     clicked: [],
+    tree: [],
   }
+
+  componentDidMount() {
+    // Typical usage (don't forget to compare props):
+    if(this.props.tree) {
+     this.setState({ tree: this.decorateTitles(this.props.tree) });
+    }
+  }
+
+  decorateTitles = tree => tree.map(
+    branch => ({ ...branch, title: (branch.sections || branch.content) ? this.addTitleTooltip(branch.title, branch.tooltip) : branch.title })
+  )
   
   /*
   * Accordion custom theme
@@ -62,6 +84,7 @@ export default class SemanticAccordionMenu extends Component {
       padding: 10px 12px 10px 16px;
       display: block;
       margin-right: 3px;
+      margin-top: 2px;
     }
 
     .contentWrapper a {
@@ -78,7 +101,7 @@ export default class SemanticAccordionMenu extends Component {
     }
     
   `;
-  
+
   /**
    * Item style wrapper for custom accordions
    */
@@ -112,18 +135,48 @@ export default class SemanticAccordionMenu extends Component {
   /*
   * Wrapper for first level links
   */
-  itemWrapper = (el) => ({ children: (<div className="itemWrapper" style={this.ItemStyle} onClick={this.itemClick}>{el}</div>)});
+  itemWrapper = ({ title, tooltip }) => ({
+    children: (
+      <Popup
+        content={tooltip}
+        size="tiny"
+        inverted
+        disabled={!this.props.collapsed}       
+        trigger={
+          <div className="itemWrapper" style={this.ItemStyle} onClick={this.itemClick}>{title}</div>
+        }
+      />
+    )
+  });
 
   /*
-  * Wrapper for contentsk
+  * Wrapper for contents
   */
   contentWrapper = (el) => (<div className="contentWrapper" style={this.ContentStyle} onClick={this.itemClick}>{el}</div>);
   
+  addTitleTooltip = (title, tooltip) => {
+    let clonedTitle = _.cloneDeep(title);
+    if(title[0]){
+    clonedTitle[0] = <Popup size="tiny" inverted content={tooltip} position="center right" trigger={<TitleTooltipWrapper className="titleTooltipWrapper">{clonedTitle[0]}</TitleTooltipWrapper>} />;
+      if(title[1]) {
+        clonedTitle[1] = <div className="titleWrapper">{title[0]} <span className="titleString">{clonedTitle[1]}</span></div>
+      }
+      return clonedTitle;
+    }
+    return title;
+  }
   /*
   * Panel generator
   */
   getPanels = (objs) => objs.map(
-    (obj) => ({ key: obj.id, active: this.isActivePanel(obj), onTitleClick: this.onTitleClick, title: (!obj.sections && !obj.content) ? this.itemWrapper(obj.title) : obj.title, content: { content: this.getContent(obj)}})
+    (obj) => ({
+      key: obj.id, active: this.isActivePanel(obj),
+      onTitleClick: this.onTitleClick,
+      title: (!obj.sections && !obj.content) ?
+        this.itemWrapper({ title: obj.title, tooltip: obj.tooltip }) :
+        obj.title, 
+      content: { content: this.getContent(obj) }
+    })
   )
   
   /*
@@ -169,7 +222,7 @@ export default class SemanticAccordionMenu extends Component {
   }
   
   /*
-  * Generate subacordions
+  * Generate subaccordions
   */
   getContent = (obj) => Array.isArray(_get(obj, 'sections'))  ? <Accordion.Accordion panels={this.getPanels(obj.sections || null )} /> : this.contentWrapper(obj.content);
 
@@ -177,7 +230,7 @@ export default class SemanticAccordionMenu extends Component {
     const StyledAccordion = this.StyledAccordion;
     return (
       <div style={{ width: !this.props.collapsed ? this.props.width : this.props.collapsedWidth, fontSize: this.props.fontSize }} className={`accordion-menu${this.props.collapsed ? ' collapsed' : ''}`}>
-        <StyledAccordion panels={this.getPanels(this.props.tree)} styled />
+        <StyledAccordion onClick={() => this.props.collapsed && this.props.openMenu()} panels={this.getPanels(this.state.tree)} styled />
       </div>
     )
   }
@@ -200,6 +253,8 @@ SemanticAccordionMenu.propTypes = {
     firstLevelBackgroundColor:  PropTypes.string,
     /** Collapsed menu */
     collapsed: PropTypes.bool,
+    /** Open menu function */
+    openMenu: PropTypes.func,
   }
 
 SemanticAccordionMenu.defaultProps = {

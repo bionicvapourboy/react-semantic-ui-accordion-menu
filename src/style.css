@@ -16,6 +16,10 @@
     box-shadow: none;
 }
 
+.accordion-menu .accordion.ui.styled .title {
+    position: relative;
+}
+
 .accordion-menu .accordion.ui.styled .content.active,
 .accordion-menu .accordion.ui.styled .content {
     margin-top: 0px!important;    
@@ -62,4 +66,25 @@
 .accordion-menu.collapsed  .accordion.ui.styled .title > .itemWrapper{
     display: inline-block;
 }
+
+.accordion-menu.collapsed  .accordion.ui.styled .title > .titleTooltipWrapper, 
+.accordion-menu.collapsed  .accordion.ui.styled .title > .titleWrapper
+{
+    display: block!important;
+}
+
+.accordion-menu.collapsed  .accordion.ui.styled .title > .titleWrapper i
+{
+    display: none!important;
+}
+
+.accordion-menu.collapsed  .accordion.ui.styled .title > .titleWrapper .titleString {
+    visibility: hidden;
+}
+
+.accordion-menu .accordion.ui.styled .title > .titleTooltipWrapper {
+    display: none!important;
+}
+
+
 
