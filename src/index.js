@@ -157,9 +157,9 @@ export default class SemanticAccordionMenu extends Component {
   addTitleTooltip = (title, tooltip) => {
     let clonedTitle = _.cloneDeep(title);
     if(title[0]){
-    clonedTitle[0] = <Popup size="tiny" inverted content={tooltip} position="center right" trigger={<TitleTooltipWrapper className="titleTooltipWrapper">{clonedTitle[0]}</TitleTooltipWrapper>} />;
+    clonedTitle[0] = <Popup key="tooltip" ysize="tiny" inverted content={tooltip} position="center right" trigger={<TitleTooltipWrapper className="titleTooltipWrapper">{clonedTitle[0]}</TitleTooltipWrapper>} />;
       if(title[1]) {
-        clonedTitle[1] = <div className="titleWrapper">{title[0]} <span className="titleString">{clonedTitle[1]}</span></div>
+        clonedTitle[1] = <div key="wrapper" className="titleWrapper">{title[0]} <span className="titleString">{clonedTitle[1]}</span></div>
       }
       return clonedTitle;
     }
