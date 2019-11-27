@@ -130,7 +130,7 @@ export default class SemanticAccordionMenu extends Component {
   /**
    * Check for routes in child NavLink of react-router
    */
-  checkChildRoutes = (obj) => serialize(obj).match(routePattern).map(route => route.split("\"")[2]);
+  checkChildRoutes = (obj) => serialize(obj).match(routePattern) ? serialize(obj).match(routePattern).map(route => route.split("\"")[2]) : [];
   
   /*
   * Wrapper for first level links
