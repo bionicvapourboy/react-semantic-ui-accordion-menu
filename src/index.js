@@ -5,6 +5,7 @@ import Styled from 'styled-components';
 import './style.css';
 import { Accordion, Popup } from 'semantic-ui-react';
 import _get from 'lodash/get';
+import _cloneDeep from 'lodash/cloneDeep';
 import { serialize, deserialize } from "react-serialize";
 
 const routePattern = /to\":\"\/(.*?)\"/g;
@@ -155,7 +156,7 @@ export default class SemanticAccordionMenu extends Component {
   contentWrapper = (el) => (<div className="contentWrapper" style={this.ContentStyle} onClick={this.itemClick}>{el}</div>);
   
   addTitleTooltip = (title, tooltip) => {
-    let clonedTitle = _.cloneDeep(title);
+    let clonedTitle = _cloneDeep(title);
     if(title[0]){
     clonedTitle[0] = <Popup key="tooltip" ysize="tiny" inverted content={tooltip} position="center right" trigger={<TitleTooltipWrapper className="titleTooltipWrapper">{clonedTitle[0]}</TitleTooltipWrapper>} />;
       if(title[1]) {
