@@ -45,7 +45,7 @@
     "react-docgen-displayname-handler": "^2.1.1",
     "react-dom": "^16.4.0",
     "react-router-dom": "^5.0.0",
-    "react-styleguidist": "^9.0.6",
+    "react-styleguidist": "^13.1.4",
     "styled-components": "^4.2.0",
     "svg-url-loader": "^2.3.2",
     "webpack": "^4.29.6",
@@ -54,7 +54,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
-    "react-scripts": "1.1.4",
+    "react-scripts": "5.0.1",
     "react-serialize": "^0.2.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.86.0"
